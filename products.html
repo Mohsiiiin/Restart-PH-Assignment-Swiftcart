@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link rel="stylesheet" href="style.css" />
+        <!-- //? google fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+            rel="stylesheet"
+        />
+        <!-- //? tailwindcss -->
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+        <!-- //? daisyUI -->
+        <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+        <!-- //? fontawesome -->
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        />
+
+        <title>SwiftCart</title>
+    </head>
+    <body>
+        <!-- //! Navbar -->
+        <div class="drawer drawer-end z-50">
+            <input id="cart-drawer" type="checkbox" class="drawer-toggle" />
+
+            <div class="drawer-content flex flex-col">
+                <header class="shadow-md bg-white">
+                    <div class="max-w-6xl mx-auto navbar bg-base-100 px-5 sm:px-0">
+                        <div class="navbar-start">
+                            <a href="/" class="text-2xl font-bold text-primary">SwiftCart</a>
+                        </div>
+
+                        <nav class="navbar-center hidden lg:flex">
+                            <ul class="flex items-center gap-x-6">
+                                <li>
+                                    <a href="/" class="text-gray-600 font-medium text-base">Home</a>
+                                </li>
+                                <li>
+                                    <a
+                                        href="/products.html"
+                                        class="text-primary font-medium text-base"
+                                        >Products</a
+                                    >
+                                </li>
+                                <li>
+                                    <a href="#" class="text-gray-600 font-medium text-base"
+                                        >About</a
+                                    >
+                                </li>
+                                <li>
+                                    <a href="#" class="text-gray-600 font-medium text-base"
+                                        >Contact</a
+                                    >
+                                </li>
+                            </ul>
+                        </nav>
+
+                        <div class="navbar-end gap-6 sm:gap-0">
+                            <label
+                                for="cart-drawer"
+                                class="relative cursor-pointer flex items-center"
+                            >
+                                <span
+                                    id="cart-count"
+                                    class="absolute -top-2 -right-5 badge badge-primary badge-sm text-[10px] w-5 h-5 p-0 flex items-center justify-center border-none"
+                                    >0</span
+                                >
+                                <i class="fa-solid fa-cart-shopping text-gray-600 text-lg"></i>
+                            </label>
+
+                            <div class="dropdown dropdown-end">
+                                <div tabindex="0" role="button" class="lg:hidden">
+                                    <i
+                                        class="fa-solid fa-bars text-gray-600 text-lg cursor-pointer"
+                                    ></i>
+                                </div>
+                                <ul
+                                    tabindex="0"
+                                    class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-4 w-52 p-2 shadow border border-gray-200"
+                                >
+                                    <li>
+                                        <a href="/" class="text-gray-600 font-medium">Home</a>
+                                    </li>
+                                    <li>
+                                        <a href="/products.html" class="text-primary font-medium"
+                                            >Products</a
+                                        >
+                                    </li>
+                                    <li>
+                                        <a href="#" class="text-gray-600 font-medium">About</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="text-gray-600 font-medium">Contact</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+            </div>
+
+            <div class="drawer-side">
+                <label for="cart-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
+                <div
+                    class="menu p-6 w-80 sm:w-96 min-h-full bg-white text-base-content shadow-2xl flex flex-col"
+                >
+                    <div class="flex justify-between items-center border-b pb-4 mb-4">
+                        <h2 class="text-xl font-bold flex items-center gap-2">
+                            <i class="fa-solid fa-cart-shopping text-primary"></i> My Cart
+                        </h2>
+                        <label for="cart-drawer" class="btn btn-sm btn-circle btn-ghost">✕</label>
+                    </div>
+
+                    <div id="cart-items-list" class="flex-grow overflow-y-auto space-y-4"></div>
+
+                    <div class="border-t pt-4 mt-4">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-gray-600 font-medium">Subtotal</span>
+                            <span id="cart-total" class="text-2xl font-black text-gray-900"
+                                >$0.00</span
+                            >
+                        </div>
+                        <button
+                            class="btn btn-primary w-full bg-[#5851FF] border-none text-white font-bold h-12"
+                        >
+                            Checkout Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- //! Our Products -->
+        <section class="max-w-6xl mx-auto py-16 px-5 sm:px-0">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-black text-gray-900 mb-6">Our Products</h2>
+
+                <div id="product-categories" class="flex flex-wrap justify-center gap-3">
+                    <span class="loading loading-bars loading-md text-primary"></span>
+                </div>
+            </div>
+
+            <div id="product-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="skeleton-loader contents"></div>
+            </div>
+        </section>
+
+        <!-- //! Modal -->
+        <dialog id="product_details_modal" class="modal modal-bottom sm:modal-middle">
+            <div class="modal-box max-w-3xl p-0">
+                <form method="dialog">
+                    <button
+                        class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 z-50 bg-white shadow-md"
+                    >
+                        ✕
+                    </button>
+                </form>
+
+                <div id="modal-content" class="flex flex-col md:flex-row"></div>
+            </div>
+            <form method="dialog" class="modal-backdrop">
+                <button>close</button>
+            </form>
+        </dialog>
+
+        <!-- //! Footer -->
+        <footer class="bg-[#1E2939] py-16 px-5 sm:px-0">
+            <div class="max-w-6xl mx-auto">
+                <div
+                    class="flex flex-col md:flex-row justify-between gap-10 border-b border-gray-700 pb-10"
+                >
+                    <div class="md:w-1/4">
+                        <h1 class="text-2xl font-bold text-[#7983F8] mb-4">SwiftCart</h1>
+                        <p class="text-base-300/50 text-sm leading-relaxed">
+                            Your one-stop shop for all your fashion and lifestyle needs. Quality
+                            products, fast delivery, and excellent support.
+                        </p>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row gap-5 sm:gap-20">
+                        <nav class="flex flex-col space-y-3">
+                            <h6
+                                class="text-sm text-base-300/50 opacity-100 uppercase font-bold mb-2"
+                            >
+                                Quick links
+                            </h6>
+                            <a href="/" class="link link-hover text-sm text-base-300/70">Home</a>
+                            <a
+                                href="/products.html"
+                                class="link link-hover text-sm text-base-300/70"
+                                >Products</a
+                            >
+                            <a class="link link-hover text-sm text-base-300/70">About</a>
+                            <a class="link link-hover text-sm text-base-300/70">Contact</a>
+                        </nav>
+
+                        <nav class="flex flex-col space-y-3">
+                            <h6
+                                class="text-sm text-base-300/50 opacity-100 uppercase font-bold mb-2"
+                            >
+                                Support
+                            </h6>
+                            <a class="link link-hover text-sm text-base-300/70">FAQ</a>
+                            <a class="link link-hover text-sm text-base-300/70">Shipping</a>
+                            <a class="link link-hover text-sm text-base-300/70">Returns</a>
+                            <a class="link link-hover text-sm text-base-300/70">Privacy Policy</a>
+                        </nav>
+                    </div>
+
+                    <div class="md:w-1/3">
+                        <h6
+                            class="footer-title text-base-300/50 text-sm opacity-100 uppercase font-bold mb-2"
+                        >
+                            Subscribe to our newsletter
+                        </h6>
+                        <p class="text-sm text-base-300/90 mb-5 sm:w-[65%]">
+                            The latest news, articles, and resources, sent to your inbox weekly.
+                        </p>
+                        <div class="join w-full">
+                            <input
+                                type="text"
+                                placeholder="Enter your email"
+                                class="input input-bordered join-item w-full bg-white text-gray-800 focus:outline-none"
+                            />
+                            <button
+                                class="btn btn-primary join-item bg-[#5851FF] border-none text-white px-6"
+                            >
+                                Subscribe
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    class="flex flex-col-reverse sm:flex-row justify-between items-center mt-8 text-base-300/50 text-sm"
+                >
+                    <p class="sm:text-base">© 2025 SwiftCart, Inc. All rights reserved.</p>
+                    <div class="flex gap-5 text-xl mt- mb-4 sm:mb-0 sm:mt-0">
+                        <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fa-regular fa-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <script src="./Js/script.js"></script>
+    </body>
+</html>
